@@ -1,3 +1,4 @@
 payload:
   - DOMAIN,copilot.microsoft.com
   - PROCESS-NAME,clash-verge.exe
+  - DOMAIN-SUFFIX,loli.net
