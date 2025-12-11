@@ -5,3 +5,4 @@ payload:
   - PROCESS-NAME,kpm.exe
   - DOMAIN-SUFFIX,lencr.org
   - DOMAIN-SUFFIX,adtidy.org
+  - DOMAIN-SUFFIX,datadog.pool.ntp.org
