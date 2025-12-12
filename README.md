@@ -6,20 +6,10 @@ https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-direct
 diy-proxy:
 https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-proxy.yaml
 
-广告:
-https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomo.yaml
-
 ## 规则
 
 ```yaml
 rule-providers:
-  reject:
-    type: http
-    behavior: domain
-    url: "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomo.yaml"
-    path: ./ruleset/reject.yaml
-    interval: 86400
-
   diy-direct:
     type: http
     behavior: classical
