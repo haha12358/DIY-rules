@@ -116,7 +116,6 @@ rules:
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
-  - RULE-SET,reject,REJECT
   - RULE-SET,diy-direct,DIRECT
   - RULE-SET,diy-proxy,♻️ 手动切换
   - RULE-SET,icloud,DIRECT
