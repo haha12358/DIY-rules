@@ -1,10 +1,1 @@
 payload:
-  - DOMAIN-SUFFIX,jetbrains.com
-  - DOMAIN-KEYWORD,darkreader
-  - DOMAIN-KEYWORD,kaspersky
-  - PROCESS-NAME,kpm.exe
-  - DOMAIN-SUFFIX,lencr.org
-  - DOMAIN-SUFFIX,adtidy.org
-  - DOMAIN-SUFFIX,pool.ntp.org
-  - DOMAIN-SUFFIX,nelreports.net
-  - DOMAIN-SUFFIX,pool.ntp.org
