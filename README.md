@@ -1,4 +1,4 @@
-## 自用
+# 自用
 
 diy-direct:
 https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-direct.yaml
@@ -6,10 +6,20 @@ https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-direct
 diy-proxy:
 https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-proxy.yaml
 
+## 引用
+https://github.com/Loyalsoldier/clash-rules
+
 ## 规则
 
 ```yaml
 rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
   diy-direct:
     type: http
     behavior: classical
@@ -116,6 +126,7 @@ rules:
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
+  - RULE-SET,reject,REJECT
   - RULE-SET,diy-direct,DIRECT
   - RULE-SET,diy-proxy,♻️ 手动切换
   - RULE-SET,icloud,DIRECT
