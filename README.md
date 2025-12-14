@@ -8,30 +8,18 @@ https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-proxy.
 
 ## 引用
 https://github.com/Loyalsoldier/clash-rules
+https://wiki.metacubex.one/
 
 ## 规则
 
 ```yaml
 rule-providers:
+  # Loyalsoldier
   reject:
     type: http
     behavior: domain
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
     path: ./ruleset/reject.yaml
-    interval: 86400
-
-  diy-direct:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-direct.yaml"
-    path: ./ruleset/diy-direct.yaml
-    interval: 86400
-
-  diy-proxy:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-proxy.yaml"
-    path: ./ruleset/diy-proxy.yaml
     interval: 86400
 
   icloud:
@@ -117,27 +105,51 @@ rule-providers:
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt"
     path: ./ruleset/applications.yaml
     interval: 86400
+  
+  # diy
+  diy-direct:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-direct.yaml"
+    path: ./ruleset/diy-direct.yaml
+    interval: 86400
+
+  diy-proxy:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/haha12358/DIY-rules/refs/heads/main/diy-proxy.yaml"
+    path: ./ruleset/diy-proxy.yaml
+    interval: 86400
 ```
 
 ```yaml
-# "♻️ 手动切换"需修改
+# 自行修改
 rules:
-  - RULE-SET,applications,DIRECT
-  - DOMAIN,clash.razord.top,DIRECT
-  - DOMAIN,yacd.haishan.me,DIRECT
-  - RULE-SET,private,DIRECT
-  - RULE-SET,reject,REJECT
-  - RULE-SET,diy-direct,DIRECT
-  - RULE-SET,diy-proxy,♻️ 手动切换
-  - RULE-SET,icloud,DIRECT
-  - RULE-SET,apple,DIRECT
-  - RULE-SET,google,♻️ 手动切换
-  - RULE-SET,proxy,♻️ 手动切换
-  - RULE-SET,direct,DIRECT
-  - RULE-SET,lancidr,DIRECT
-  - RULE-SET,cncidr,DIRECT
-  - RULE-SET,telegramcidr,♻️ 手动切换
-  - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,♻️ 手动切换
+  - RULE-SET,applications,➡️ 全球直连
+  - DOMAIN,clash.razord.top,➡️ 全球直连
+  - DOMAIN,yacd.haishan.me,➡️ 全球直连
+
+  - RULE-SET,private,➡️ 全球直连
+  - RULE-SET,reject,🚫 广告拦截
+
+  - RULE-SET,diy-direct,➡️ 全球直连
+  - RULE-SET,diy-proxy,🚀 手动切换
+
+  - RULE-SET,icloud,➡️ 全球直连
+  - RULE-SET,apple,➡️ 全球直连
+  - RULE-SET,google,🚀 手动切换
+
+  - RULE-SET,proxy,🚀 手动切换
+  - RULE-SET,direct,➡️ 全球直连
+
+  - RULE-SET,lancidr,🏠 局域网
+  - RULE-SET,cncidr,➡️ 全球直连
+  - RULE-SET,telegramcidr,🚀 手动切换
+
+  - GEOSITE,CN,🇨🇳 CN兜底
+  - GEOIP,lan,🏠 局域网,no-resolve
+  - GEOIP,CN,🇨🇳 CN兜底,no-resolve
+  - GEOSITE,geolocation-!cn,🌏 !cn兜底
+
+  - MATCH,🐟 漏网之鱼
 ```
