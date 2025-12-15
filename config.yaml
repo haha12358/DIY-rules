@@ -1,13 +1,10 @@
-# ===== mihomo / Clash.Meta（RULE-SET + GEOSITE/GEOIP 兜底） =====
+# ===== mihomo （RULE-SET + GEOSITE/GEOIP） =====
 
 mixed-port: 7890 # HTTP(S)和SOCKS代理混合端口
 ipv6: true # 是否允许内核接受IPv6流量
 allow-lan: false # 允许局域网: 允许其他设备经过内核的代理端口访问互联网
 unified-delay: true # 更换延迟计算方式: 去除握手等额外延迟
 tcp-concurrent: true # TCP并发
-external-controller: 127.0.0.1:9090 # 外部控制器(HTTP)监听地址: ipv4:端口
-external-ui: ui # 外部用户界面路径(默认:工作目录/ui): 可以将静态网页资源运行在RESTful API(可以为绝对路径,或者内核工作目录的相对路径)
-external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip" # 外部用户界面压缩包下载地址: 支持文件格式：zip、tgz
 mode: rule
 # 运行模式:
 # - global: 全局代理
@@ -114,7 +111,9 @@ dns:
   # 元域名解析服务器: 解析nameserver,fallback以及其他DNS服务器配置的DNS服务器(只能使用纯IP地址,支持UDP,TCP,DoT,DoH,DoQ)
   default-nameserver:
     - tls://223.5.5.5
-    - tls://223.6.6.6
+    - tls://119.29.29.29
+    - tls://[2400:3200::1]
+    - tls://[2402:4e00::]
   # 默认域名解析服务器: 支持UDP,TCP,DoT,DoH,DoQ
   nameserver:
     - https://doh.pub/dns-query
