@@ -1,7 +1,9 @@
 proxy-providers:
   OuO:
-    url: "url" # 订阅
+    # 订阅地址
+    url: ""
     type: http
+    path: ./proxy_providers/OuO.yaml
     interval: 86400
     health-check:
       enable: true
@@ -9,24 +11,25 @@ proxy-providers:
       interval: 300
     proxy: DIRECT
     header:
-      User-Agent:
-      - "mihomo"
+      User-Agent: "mihomo"
     override:
       udp: true
-    
+
 mixed-port: 7890
 allow-lan: false
-ipv6: true
+ipv6: false
 unified-delay: true
 tcp-concurrent: true
 log-level: info
 mode: rule
 find-process-mode: strict
 global-client-fingerprint: chrome
+
 # 移动设备省电
 # disable-keep-alive: false
 # keep-alive-idle: 15
 # keep-alive-interval: 15
+
 profile:
   store-selected: true
   store-fake-ip: true
@@ -53,49 +56,44 @@ tun:
 dns:
   enable: true
   cache-algorithm: arc
-  listen: 0.0.0.0:1053
-  ipv6: true
+  listen: 127.0.0.1:1053
+  ipv6: false
   enhanced-mode: fake-ip
-  fake-ip-range: 28.0.0.1/8
-  fake-ip-filter-mode: blacklist
+  fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     - "*"
     - "+.lan"
     - "+.local"
-    - "dns.alidns.com"
-    - "doh.pub"
     - "time.*.com"
+    - "+.ntp.org"
+    - "+.ntp.aliyun.com"
   default-nameserver:
     - tls://223.5.5.5
     - tls://119.29.29.29
-    - tls://[2400:3200::1]
-    - tls://[2402:4e00::]
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
 
-# 自行修改
 proxy-groups:
-    - { name: '🚀 手动切换', type: select, proxies: ['🇭🇰 香港节点', '🇸🇬 新加坡节点', '🇯🇵 日本节点', '🇨🇳 台湾节点', '🇺🇸 美国节点', '🇪🇺 欧洲节点', '🇺🇳 其他节点'] }
-    - { name: '➡️ 全球直连', type: select, proxies: [DIRECT, '🚀 手动切换'] }
-    - { name: '🇨🇳 CN兜底', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
-    - { name: '🌏 !cn兜底', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
-    - { name: '🏠 局域网', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
-    - { name: '🐟️ 漏网之鱼', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
-    - { name: '🚫 广告拦截', type: select, proxies: [REJECT] }
-    - { name: '🇭🇰 香港节点', type: select, include-all: true, proxies: ['♻️ 香港自动'], filter: "香港|Hong Kong" }
-    - { name: '🇸🇬 新加坡节点', type: select, include-all: true, proxies: ['♻️ 新加坡自动'], filter: "新加坡|Singapore" }
-    - { name: '🇯🇵 日本节点', type: select, include-all: true, proxies: ['♻️ 日本自动'], filter: "日本|Japan" }
-    - { name: '🇨🇳 台湾节点', type: select, include-all: true, proxies: ['♻️ 台湾自动'], filter: "台湾|Taiwan" }
-    - { name: '🇺🇸 美国节点', type: select, include-all: true, proxies: ['♻️ 美国自动'], filter: "美国|United States" }
-    - { name: '🇪🇺 欧洲节点', type: select, include-all: true, filter: "德国|Germany|英国|Britain|土耳其|Turkey" }
-    - { name: '🇺🇳 其他节点', type: select, include-all: true, filter: "阿根廷|Argentina|印度|India|越南|Vietnam|泰国|Thailand" }
-    - { name: '♻️ 香港自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "香港|Hong Kong" }
-    - { name: '♻️ 新加坡自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "新加坡|Singapore" }
-    - { name: '♻️ 日本自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "日本|Japan" }
-    - { name: '♻️ 台湾自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "台湾|Taiwan" }
-    - { name: '♻️ 美国自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "美国|United States" }
-
+  - { name: '🚀 手动切换', type: select, proxies: ['🇭🇰 香港节点', '🇸🇬 新加坡节点', '🇯🇵 日本节点', '🇨🇳 台湾节点', '🇺🇸 美国节点', '🇪🇺 欧洲节点', '🇺🇳 其他节点'] }
+  - { name: '🇭🇰 香港节点', type: select, include-all: true, proxies: ['♻️ 香港自动'], filter: "(?i)香港|Hong Kong" }
+  - { name: '🇸🇬 新加坡节点', type: select, include-all: true, proxies: ['♻️ 新加坡自动'], filter: "(?i)新加坡|Singapore" }
+  - { name: '🇯🇵 日本节点', type: select, include-all: true, proxies: ['♻️ 日本自动'], filter: "(?i)日本|Japan" }
+  - { name: '🇨🇳 台湾节点', type: select, include-all: true, proxies: ['♻️ 台湾自动'], filter: "(?i)台湾|Taiwan" }
+  - { name: '🇺🇸 美国节点', type: select, include-all: true, proxies: ['♻️ 美国自动'], filter: "(?i)美国|United States" }
+  - { name: '🇪🇺 欧洲节点', type: select, include-all: true, filter: "(?i)德国|Germany|英国|Britain|土耳其|Turkey" }
+  - { name: '🇺🇳 其他节点', type: select, include-all: true, filter: "(?i)阿根廷|Argentina|印度|India|越南|Vietnam|泰国|Thailand" }
+  - { name: '➡️ 全球直连', type: select, proxies: [DIRECT, '🚀 手动切换'] }
+  - { name: '🇨🇳 CN兜底', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
+  - { name: '🌏 !cn兜底', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
+  - { name: '🏠 局域网', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
+  - { name: '🐟️ 漏网之鱼', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
+  - { name: '🚫 广告拦截', type: select, proxies: [REJECT] }
+  - { name: '♻️ 香港自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)香港|Hong Kong" }
+  - { name: '♻️ 新加坡自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)新加坡|Singapore" }
+  - { name: '♻️ 日本自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)日本|Japan" }
+  - { name: '♻️ 台湾自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)台湾|Taiwan" }
+  - { name: '♻️ 美国自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)美国|United States" }
 rule-anchor:
   domain: &domain {type: http, interval: 86400, behavior: domain, format: yaml}
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
@@ -109,8 +107,6 @@ rule-providers:
   proxy: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt"}
   direct: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt"}
   private: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt"}
-  gfw: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt"}
-  tld-not-cn: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/tld-not-cn.txt"}
 
   telegramcidr: {<<: *ip, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt"}
   cncidr: {<<: *ip, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt"}
@@ -142,14 +138,9 @@ rules:
   - RULE-SET,cncidr,➡️ 全球直连
   - RULE-SET,telegramcidr,🚀 手动切换,no-resolve
 
+  - GEOIP,LAN,➡️ 全球直连,no-resolve
   - GEOSITE,CN,🇨🇳 CN兜底
-  - GEOIP,lan,🏠 局域网,no-resolve
-  - GEOIP,CN,🇨🇳 CN兜底
   - GEOSITE,geolocation-!cn,🌏 !cn兜底
+  - GEOIP,CN,🇨🇳 CN兜底
 
   - MATCH,🐟️ 漏网之鱼
-
-
-
-
-
