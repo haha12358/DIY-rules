@@ -75,7 +75,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
   nameserver:
-    - https://8.8.8.8/dns-query#RULES&ecs=223.5.5.5/32
+    - https://8.8.8.8/dns-query#RULES&ecs=223.5.5.0/24
   fake-ip-filter:
     - "*"
     - "+.lan"
@@ -145,9 +145,9 @@ rules:
   - RULE-SET,direct,➡️ 全球直连
 
   - RULE-SET,lancidr,🏠 局域网,no-resolve
-  - RULE-SET,cncidr,➡️ 全球直连
   - RULE-SET,telegramcidr,🚀 手动切换,no-resolve
-
+  - RULE-SET,cncidr,➡️ 全球直连
+  
   - GEOIP,LAN,➡️ 全球直连,no-resolve
   - GEOSITE,CN,🇨🇳 CN兜底
   - GEOSITE,geolocation-!cn,🌏 !cn兜底
@@ -155,4 +155,5 @@ rules:
 
 
   - MATCH,🐟️ 漏网之鱼
+
 
