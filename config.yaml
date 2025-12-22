@@ -4,7 +4,7 @@ proxy-providers:
   p1:
     <<: *p
     # 订阅地址
-    url: ""
+    url: "https://oss5.cauenvao.click/api/v1/client/subscribe?token=4efff1e7eda83946ffebee61a4259bf6"
     header:
       User-Agent:
         - "mihomo"
@@ -86,31 +86,33 @@ dns:
 
 proxy-groups:
   - { name: '🚀 手动切换', type: select, proxies: ['🇭🇰 香港节点', '🇸🇬 新加坡节点', '🇯🇵 日本节点', '🇨🇳 台湾节点', '🇺🇸 美国节点', '🇪🇺 欧洲节点', '🇺🇳 其他节点'] }
-  - { name: '🇭🇰 香港节点', type: select, include-all: true, proxies: ['♻️ 香港自动'], filter: "(?i)香港|Hong Kong" }
-  - { name: '🇸🇬 新加坡节点', type: select, include-all: true, proxies: ['♻️ 新加坡自动'], filter: "(?i)新加坡|Singapore" }
-  - { name: '🇯🇵 日本节点', type: select, include-all: true, proxies: ['♻️ 日本自动'], filter: "(?i)日本|Japan" }
-  - { name: '🇨🇳 台湾节点', type: select, include-all: true, proxies: ['♻️ 台湾自动'], filter: "(?i)台湾|Taiwan" }
-  - { name: '🇺🇸 美国节点', type: select, include-all: true, proxies: ['♻️ 美国自动'], filter: "(?i)美国|United States" }
-  - { name: '🇪🇺 欧洲节点', type: select, include-all: true, filter: "(?i)德国|Germany|英国|Britain|土耳其|Turkey" }
-  - { name: '🇺🇳 其他节点', type: select, include-all: true, filter: "(?i)阿根廷|Argentina|印度|India|越南|Vietnam|泰国|Thailand" }
   - { name: '➡️ 全球直连', type: select, proxies: [DIRECT, '🚀 手动切换'] }
   - { name: '🇨🇳 CN兜底', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
   - { name: '🌏 !cn兜底', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
   - { name: '🏠 局域网', type: select, proxies: ['➡️ 全球直连', '🚀 手动切换'] }
   - { name: '🐟️ 漏网之鱼', type: select, proxies: ['🚀 手动切换', '➡️ 全球直连'] }
   - { name: '🚫 广告拦截', type: select, proxies: [REJECT] }
+  - { name: '🇭🇰 香港节点', type: select, include-all: true, proxies: ['♻️ 香港自动'], filter: "(?i)香港|Hong Kong" }
+  - { name: '🇸🇬 新加坡节点', type: select, include-all: true, proxies: ['♻️ 新加坡自动'], filter: "(?i)新加坡|Singapore" }
+  - { name: '🇯🇵 日本节点', type: select, include-all: true, proxies: ['♻️ 日本自动'], filter: "(?i)日本|Japan" }
+  - { name: '🇨🇳 台湾节点', type: select, include-all: true, proxies: ['♻️ 台湾自动'], filter: "(?i)台湾|Taiwan" }
+  - { name: '🇺🇸 美国节点', type: select, include-all: true, proxies: ['♻️ 美国自动'], filter: "(?i)美国|United States" }
+  - { name: '🇪🇺 欧洲节点', type: select, include-all: true, filter: "(?i)德国|Germany|英国|Britain|土耳其|Turkey" }
+  - { name: '🇺🇳 其他节点', type: select, include-all: true, filter: "(?i)阿根廷|Argentina|印度|India" }
   - { name: '♻️ 香港自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)香港|Hong Kong" }
   - { name: '♻️ 新加坡自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)新加坡|Singapore" }
   - { name: '♻️ 日本自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)日本|Japan" }
   - { name: '♻️ 台湾自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)台湾|Taiwan" }
   - { name: '♻️ 美国自动', type: url-test, include-all: true, hidden: true, tolerance: 20, interval: 300, filter: "(?i)美国|United States" }
 rule-anchor:
+  ad: &ad {type: http, interval: 86400, behavior: domain, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: yaml}
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
   class: &class {type: http, interval: 86400, behavior: classical, format: yaml}
 
 rule-providers:
-  reject: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"}
+  reject: {<<: *ad, url: "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblockmihomo.mrs"}
+  
   icloud: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/icloud.txt"}
   apple: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/apple.txt"}
   google: {<<: *domain, url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/google.txt"}
@@ -147,13 +149,10 @@ rules:
   - RULE-SET,lancidr,🏠 局域网,no-resolve
   - RULE-SET,telegramcidr,🚀 手动切换,no-resolve
   - RULE-SET,cncidr,➡️ 全球直连
-  
+
   - GEOIP,LAN,➡️ 全球直连,no-resolve
   - GEOSITE,CN,🇨🇳 CN兜底
   - GEOSITE,geolocation-!cn,🌏 !cn兜底
   - GEOIP,CN,🇨🇳 CN兜底
 
-
   - MATCH,🐟️ 漏网之鱼
-
-
